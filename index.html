@@ -434,6 +434,7 @@
           <!-- Netlify form — submissions go to your Netlify dashboard & email -->
           <form
             name="booking"
+            action="/"
             method="POST"
             data-netlify="true"
             data-netlify-honeypot="bot-field"
@@ -441,7 +442,7 @@
           >
             <!-- Required hidden inputs for Netlify -->
             <input type="hidden" name="form-name" value="booking" />
-            <p style="display:none;"><input name="bot-field" /></p>
+            <input type="hidden" name="bot-field" />
 
             <div class="form-row">
               <div class="form-group">
