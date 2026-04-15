@@ -222,6 +222,44 @@
       .services-section, .events-section, .testimonial-section, .booking-section { padding: 70px 24px; }
       footer { flex-direction: column; text-align: center; padding: 32px 24px; }
       .footer-links { justify-content: center; }
+
+      .hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: var(--dark);
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: rgba(255,253,245,0.98);
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 3px solid var(--yellow);
+    backdrop-filter: blur(12px);
+  }
+  .nav-links.open { display: flex; }
+}
     }
   </style>
 </head>
@@ -238,6 +276,10 @@
       <li><a href="#events">Events</a></li>
       <li><a href="#booking" class="nav-cta">Book Now</a></li>
     </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -518,7 +560,21 @@
     }, { threshold: 0.12 });
     reveals.forEach(el => observer.observe(el));
 
-  
+    const hamburger = document.getElementById('hamburger');
+const navLinks = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+
+// Close menu when a link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
   </script>
 </body>
 </html>
